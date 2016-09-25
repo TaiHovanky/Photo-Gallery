@@ -1,0 +1,163 @@
+<html>
+<head>
+	<title>picHub</title>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+
+<style type="text/css">
+</style>
+</head>
+
+<body>
+<script id="albums-template" class="row" type="text/x-handlebars-template">
+   
+  {{#each albums}}
+  	<div id="thumbnailSection">
+   
+  		<img class="col-md-2 albumThumbs" data-id="{{@index}}" src="{{thumbnail}}" />
+    </div>
+     
+    
+  		<h3 id="thumbnailTitle" class="col-md-1">{{name}}</h3>
+    	<p>{{images.length}} Photos</p>
+    </div>
+    </div>
+    {{/each}}
+  </script>
+  <script id="picsTemplate" type="text/x-handlebars-template">
+  {{#each images}}
+  	<div id="galleryPics">
+    	<img class="col-md-1 smallPic" src="{{src}}" data-id="{{@index}}" />
+      <h3>{{title}}</h3>
+    </div>
+	{{/each}}
+  </script>
+  <script id="onePicTemplate" type="text/x-handlebars-template">
+
+  	<div id="singlePics">
+    	<img class="col-md-8 col-md-offset-2" src="{{src}}" />
+      <h2>{{title}}</h3>
+    </div>
+  </script>
+  
+  <div class="top">
+    <ul class="nav nav-tabs">
+      <li class="menuItem active" id="albums"><a href="#">Albums</li></a>
+      <li class="menuItem"><a href="#">Slideshow</a></li>
+      
+    </ul>
+  </div>
+<br />
+  <div id="thumbnailContent">
+  </div>
+  <br />
+  <div class="col-md-12" id="bigPic">
+  </div>
+<script type = "text/javascript">
+
+$(document).ready(function(){
+  
+var gallery = {
+  albums:[
+    {
+      name: "Pacific Coast Highway",
+      thumbnail: "https://lh3.googleusercontent.com/fOygqiAA1o70Q4BMq_Dq7JT4malZTXmBc9d1fg3q7w5FtsNdaiVohKIUKUkLjUWvQCWEObvnrQ=w1350-h759-no",
+      images:[
+        {
+          title: "Hills on the horizon",
+         src: "https://lh3.googleusercontent.com/fOygqiAA1o70Q4BMq_Dq7JT4malZTXmBc9d1fg3q7w5FtsNdaiVohKIUKUkLjUWvQCWEObvnrQ=w1350-h759-no"},
+        {
+          title: "Ridgeline View",
+         src: "https://lh3.googleusercontent.com/F43NS8e_BjmiL7iZqNQoYn7Kao0w7QG0kYos884Bv6mtZ7yOQTs0-VXUK67f9iVRVsVCZZpiBtvnwFOYRBzoSXAdEt1z71AXUEl4bQLz9rZxT-XAuL3K8A3DOEWhttBmbWt1xdA17xbbo-WWaofXdPC1NCNwtkg7xLbTWEjMSa7uBx8FOTYZ-fN6MYQ3xT8ayiZJKISi546k6xz9qlDgBJ_anFNlGKOdzl09bn4VkmlhLxJUlse-cnBOUTng9gx2kCR5E_pKTXDB8LtvwKC0j-z1LDDf2bfCisXIpNjb6vRzIosZ83WMV0cVLjClZLydpg_1mhQzilCKm1wu92-RsK0Jg1dqfTPuv5idhvFnfHXbJ3KZTBnGulk_E8M_n2KgHUfhCQOuVI_x_kG0bt2M-HEbmDtfoqekxXmWaZX450QoZGUntIWuGWypld-N4MxXPF90n1Seh6LeLUz-ko1kZzw_5QQe2fRzK2gN_-jajUie8OaqoeEqeTbZcFtNd7HLoCtbPXxPge-XhcHd04tFcOCTnvCpPLEhE3A5epfpbqqelab0mJyJMUhQLHqwCKBO6QTP1FA9uz0aJdNd6ogjKVBdLvwVg9MVruBPRDBiT2pvOZpr=w1412-h794-no"
+        },
+        {
+          title: "Sunset",
+          src: "https://lh3.googleusercontent.com/SlUiC2tKU9yg3-6hHem37Am4GNOmmDNU60BHHmrnxch7U0fwFDmaT-5O91I9WIYaQzpOoSYLhQ=w1412-h794-no"
+        }
+        ]},
+    {
+      name: "Yosemite",
+      thumbnail: "https://lh3.googleusercontent.com/MoK57OjbDqUzo2zx8pyj5Zxlgju9yCGild0rsvTSMtAC7PsicvcTLdyWZintjycxU-BAsX5eXg=w1412-h794-no",
+      images: [
+         {
+           title: "Yosemite hiking",
+           src: "https://lh3.googleusercontent.com/MoK57OjbDqUzo2zx8pyj5Zxlgju9yCGild0rsvTSMtAC7PsicvcTLdyWZintjycxU-BAsX5eXg=w1412-h794-no"},
+        {
+          title: "Valley sunrise",
+          src: "https://lh3.googleusercontent.com/qIYUgJRPuMX-MmF57yPJCgpo4D0VFE7kbArZ0hbr2jXj9TebpdzICJQFqf7dO8P3axMI7frbTA=w1412-h794-no"
+        },
+        {
+          title: "Yosemite Falls",
+          src: "https://lh3.googleusercontent.com/HJlPPF7OIk6Nw9ZgMEhDZJu5WMrXXtU_TYwNqCXuMGylZuvEQb1s-4BMsd_dmkpHRJ2ddYmGcmEgfFCHNAJP_c_vYMRLvQdRcgiE7s5WlN2SPW77-Qfyacu_N7fD7X3Z2u3MHh6jFNsgcdP8rDfjKOuN5ZJmCVoaFCeSIN8dgZybg1oJVgXk_O2bgd4sxHXNGYch-mLUaG92PA0Uclk78jF-PiC663c3TCG3smskBb52Y47cfV_WzjDAoqKUU_RsCRM4Rqs7Cm_SCODSrhQ0NfbbEDV0qJ8LjtbkowNSKvwrP9M36doxql6pCfBKpU2_ReyJt6zk4dr_rNqavzbyCMkuUN4s0Ma-1C14_eL3TeniohAq5qFqR7U4HAx_4pNa0krscTtSQC_Hxa8LKAdVxWQBxBdYS363prKyvV7DdtKLRHXPyFYgLCo-2RWMxN_9_hw7l0WsSBqCgzmpqcgSOvt2R1rMsc-pSSgOrVkxysawdAFGfT27ekxlw9RJlCI5Y0l3WYHfdnY3EKlXwLNTRtr4gZVyAxSSsbFyYDptUad8swrSv3DrSISif1kE1xvGDIbHTfoFNIv_k1HKEIR6INe86pjnBNXMHd-fk7XqFjLlINBr=w1412-h794-no"
+        }, 
+        ]},
+    {
+      name: "Mt. Rainier",
+      thumbnail: "https://lh3.googleusercontent.com/Ef08Tb5OSVzlzZ7TMA3mghaMk4mFzcvqmoInAr_fW2Esrz_fRooTW0UhRSa7zKWvSBYdI3kUtGtUPTbqZYb0QhbX7htCvQ9kPgeW9Ab-UF8tjVaI6XL56fVM-55iFh00tb9ZO8IWyAkMP-Np1QRcIBRtvoDshAB6Dc3R80n10_4PLySMK8xhbFuFqz2TAsyDUzhdYW1HMxsO6Zxu-vJp9masoRRMU6CnqP-iNqIQNsjIyXLiAnxkCw8nNmYFASJgM52m4alFmnPqOXE0O8s_ORFzy4dYstLx05z67lJ-nX6p5XXbaZyIETZsn4hLXxHr1jI9OSTA_-UEKnBlHKvzApThJUI9r031icCjgJ2d0Jvd17lRwU4lQl7yJqcNnHjUoRqCbRC94HhW9ZGTHsV_fSE_B8YZ6SgIzWCYrYuyXcX_PlLrr3NIJc3BT0zDwsSdQPnkEmH-t5seEso-oa-uqr8QXNwFTv1IOxHFc6TJobCXTkL1noZd9COLuabnZw21VpZ69zlSjNnmjlPdtISjo2yesrRvy391cgwBkD_-BAOCMwMZ1Ey9uPIWvJGMYJQLQ_bXghKyQYgN8YxxL6ShccdpT9JRc675s46L0rRCcZX1CB7V=w1412-h794-no",
+      images: [
+        {title: "Mt. Rainier",
+         src: "https://lh3.googleusercontent.com/Ef08Tb5OSVzlzZ7TMA3mghaMk4mFzcvqmoInAr_fW2Esrz_fRooTW0UhRSa7zKWvSBYdI3kUtGtUPTbqZYb0QhbX7htCvQ9kPgeW9Ab-UF8tjVaI6XL56fVM-55iFh00tb9ZO8IWyAkMP-Np1QRcIBRtvoDshAB6Dc3R80n10_4PLySMK8xhbFuFqz2TAsyDUzhdYW1HMxsO6Zxu-vJp9masoRRMU6CnqP-iNqIQNsjIyXLiAnxkCw8nNmYFASJgM52m4alFmnPqOXE0O8s_ORFzy4dYstLx05z67lJ-nX6p5XXbaZyIETZsn4hLXxHr1jI9OSTA_-UEKnBlHKvzApThJUI9r031icCjgJ2d0Jvd17lRwU4lQl7yJqcNnHjUoRqCbRC94HhW9ZGTHsV_fSE_B8YZ6SgIzWCYrYuyXcX_PlLrr3NIJc3BT0zDwsSdQPnkEmH-t5seEso-oa-uqr8QXNwFTv1IOxHFc6TJobCXTkL1noZd9COLuabnZw21VpZ69zlSjNnmjlPdtISjo2yesrRvy391cgwBkD_-BAOCMwMZ1Ey9uPIWvJGMYJQLQ_bXghKyQYgN8YxxL6ShccdpT9JRc675s46L0rRCcZX1CB7V=w1412-h794-no"},{title: "South Beach walk"
+         },
+        {
+          title: "Tundra",
+          src: "https://lh3.googleusercontent.com/aPu0laUMUzKb8DkU5Iv3m9Wj9_mrP_hZelRl1HaYnPDqcYqJj8kUAOsRLQxdv6pRMuVP8MNK3xxmDPLEgpVthltdc4bDvRe-tj0LsayVfl14CkDJhUipeJqTeu6LiiuZG9BoQKXtMHob5T069n_Lrcl2_KR6BuXTfixVynUeqAFdg2uVeg8nyEUmP7HA9_img4FbmqS-J5Ykndyz8e9pw0uqlGp2MkYac6xd_zVkD6O2as1STrc3ws07KJAgFNtGnsAEJwzrJjfAeV8CgS_Y2jQtwHljLW72OFjLhgIcAclPe8R7ZnsanDzZYqTkPqhGarfipKRfN5TOVnaMWBan8vNm6GCD5IyOBkeB9yIaYF5EGaEFW5hseC-MqdoLTnRgt0sFb2jZFRf0dNKrWtQfPggy1pD1ypZOQggnUeF2gDF2Ag0QX-G9JsdgGfxjd8WyaOm_Wp0Mc5AcMwEzmT7E5vdJ7QQZTU9cjaxguXu-Fe_ZpolpPjMjccZYjws0GkAHo7gCsPPWYNxNjQfqBMqBoysTtf88_BX1AGoKESFLKh8DS0wsQp9dEhQHkK1t09EJXoKXCU3vJumuzx1pMDeEZRWQkH6VzlTv8mSJI3dKNJ5LSCgf=w1412-h794-no"
+        },
+        {
+          title: "Valley",
+          src: "https://lh3.googleusercontent.com/rJ4-2c9S4_RHjdJQf3d1f6Y8lgVRavWUNtB7Fq9HxaqCgDAwoZo43vLLDcz7ANR_1oxetNa7mrSYQ3ZK6TSDx5SXTYvgne1ecmpgUjIJaU-5nu-jhXWS5U7y6QOg0kcyoj0uqqHxKByrSsJvRD1PF_l7YwESBHMTNhxXESqzDt5G3cjEu-Z0PZ1YrRYw4F265agQxo-HXeRh0v2kWRzxzBYepD3Fh7ROufg0aMu0ij8ZB1y4UPCWcB0aKSd9TIyN-rlteBTLfhfLgNNUif0_NJewWiOo1uV8DPU12_ViqYecLMkKeyeNTWZwe_TrgOnQ0xCuWc6pILedGDb6fTValCPsX0Y7s6sPT2u4GDhHrCHkoQQHZP_JE56dy2uVNjDXl2Mtt_9T3FRwbjK3njAihh0emT4sSFr2hWdaGT57uPuwyhIyrRCmkJg44mLXWLPSBs31U6lzEuQTVeAnkQ3bIjxKYhYEnt9OSw5bh9k9TGgVMh1E_CdBp9yaFx035f5pEBdqEIMlYNVV5fPAsG_mUwJG8FRpHL2i02jUajJXGYipnmiQrSsbXC7Pl6pnn3fUXYpPoVvzG3Sfn97oio_z09doZc2paJQLzENIU2WopnPQz87q=w1412-h794-no"
+        }
+        ]},
+    {
+      name: "South Beach",
+      thumbnail: "https://lh3.googleusercontent.com/HUsHevcDlsBzydDX3SuseRahE69jdndHEEI-K-OwComT-hPc9sSC1fAwS1rGbHMMnTl8SzTTs2kaJqGuUWHBsQeI9ISrDp9Kn8fef58c7-bzs3HIwEN4a9aHb2m3NRXneEIHvdcBG-W4GOYjogTtMxiW5qdErUEpz4TfdN_7XUn3Mrgw3HYSvyvnMw56TecCLrSyVcW5awANSIj35zKiq1qY9YwRTn2n4UOsD2W-dW8DH1i6QM_uBuU8V2m-jjyyiM6JWdc9y0HG87DM445-Ar77jXiEfeQglBVu-yDC2QLGxIMwvEDY98NftsjM_h5DC10vWXfIw_kyqpTDHp5_OTWALAS50UTg1MNUS5pefDFo3s72Y2ochZDOkdmMR-K4WxYaGSsN2Ey5S-49WQKNf2FooUc6aCBNfY-PTz-3m7klzsWRZj5bPJQ2n0QVSuLXFGaps8Yuf6Jzv3gW8WjCNLndRs0vWqcoXiAxsCPq64cgIs3vu2hRyIpA50mo3r4r1W7EhMRSdGGNlVJADXAxakBiGmkwey-zCMD831A7gykwD4fjj1jki2Wxox_7a3QG2EYOMDQtVrqyO5wlCxRelH93am_vF5A_UfAyT5skn9ZpJFtv=w1412-h794-no",
+      images: [
+        {
+          title: "Beach",
+          src: "https://lh3.googleusercontent.com/HUsHevcDlsBzydDX3SuseRahE69jdndHEEI-K-OwComT-hPc9sSC1fAwS1rGbHMMnTl8SzTTs2kaJqGuUWHBsQeI9ISrDp9Kn8fef58c7-bzs3HIwEN4a9aHb2m3NRXneEIHvdcBG-W4GOYjogTtMxiW5qdErUEpz4TfdN_7XUn3Mrgw3HYSvyvnMw56TecCLrSyVcW5awANSIj35zKiq1qY9YwRTn2n4UOsD2W-dW8DH1i6QM_uBuU8V2m-jjyyiM6JWdc9y0HG87DM445-Ar77jXiEfeQglBVu-yDC2QLGxIMwvEDY98NftsjM_h5DC10vWXfIw_kyqpTDHp5_OTWALAS50UTg1MNUS5pefDFo3s72Y2ochZDOkdmMR-K4WxYaGSsN2Ey5S-49WQKNf2FooUc6aCBNfY-PTz-3m7klzsWRZj5bPJQ2n0QVSuLXFGaps8Yuf6Jzv3gW8WjCNLndRs0vWqcoXiAxsCPq64cgIs3vu2hRyIpA50mo3r4r1W7EhMRSdGGNlVJADXAxakBiGmkwey-zCMD831A7gykwD4fjj1jki2Wxox_7a3QG2EYOMDQtVrqyO5wlCxRelH93am_vF5A_UfAyT5skn9ZpJFtv=w1412-h794-no"
+        },
+        {
+          title: "Sunset",
+          src: "https://lh3.googleusercontent.com/CktjTBHkhGHOdavIqLqLLyHiYbFVNzvyfiAP2cixYY2AbzwXvP8HrXmFy3L0RZ16LzebcDDqntQq6QZ_L2gn_0BIkiPT-2Q_88C07Rc3IkitzckOjgpnMM04mGW7OxPD9xDS3_nMur7ExhtUKQsEMTYn9WHk9xI2TMo2STlaEqdM8m1eKEGjp2ZnhrnQEBvvc1fez7QpIZkK4LIa-o0DO2BkaoO5Mh_9CYKXpwyHE_ULINqtbX5jMSvU0FSRRpgs_h34SnqvBNSzJjWxILUVSRLeGE9mop6rVEhFchZdkv-hoDrH_Z5-OrmJilc3MmDSeOLdtB7u2MtQcFO3XjmVec98I980Z-R6VnydLjwaCkh7Y7jgTMBcFmnqc5tXQLPARXz2oF0sSXJcTSfj4t_VRfi4LtWHugksXnXERpAMTAmUpeaaKCOqbVvV4lPIXCKuew9U6L74YqLf27fkg5vAYAtt09DNrPk1zsuIka0pn0s9HXKMLTln8pTP6bDbH5dTxWGGpi8AQ6Qf_KbdyvcCvCyzGMvIDtWo0fEwXyZ-bmrrbVqVIw8TBclbES9mzBMsQTpRCmPq7SIzBTgqyKuzN1RWB5qMFOpjrf0IAY6t-hZ-y_8v=w1412-h794-no"
+        }
+      ]}
+  ]};
+
+  var source = $("#albums-template").html();
+  var albumTemplate = Handlebars.compile(source);
+  
+  source = $("#picsTemplate").html();
+  var picTemplate = Handlebars.compile(source);
+  
+  source = $("#onePicTemplate").html();
+  var onePicTemplate = Handlebars.compile(source);
+  
+    
+  //$("#thumbnailContent").html(picHtml);
+  $("#albums").click(function(){
+  var albumHtml = albumTemplate(gallery);
+  $("#thumbnailContent").html(albumHtml);
+   
+    $(".albumThumbs").click(function(){
+      var albumNum = $(this).data("id");
+      var html = picTemplate(gallery.albums[albumNum]);
+      $("#thumbnailContent").html(html);
+      
+      $(".smallPic").click(function(){
+        var imgNum = $(this).data("id");
+        var bigHtml = onePicTemplate(gallery.albums[albumNum].images[imgNum]);
+        $("#bigPic").html(bigHtml);
+      });
+    });
+  });
+  //
+});
+
+</script>
+</body>
